@@ -1,2 +1,11 @@
 // script that inserts a document in the collection school
-db.school.insertOne({"name": "Holberton school"})
+var result = db.school.insertOne({"name": "Holberton school"});
+
+// Check if the response format supports the modern format
+if (result.hasOwnProperty("acknowledged") && result.hasOwnProperty("insertedId")) {
+    // MongoDB modern format
+    printjson(result);
+} else {
+    // Older WriteResult format
+    print("WriteResult({ \"nInserted\" : " + result.nInserted + " })");
+}
